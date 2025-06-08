@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영양한입연구소 - 당신의 건강한 하루</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .font-brand {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        .section-title {
+            @apply text-4xl font-bold text-center text-gray-800 mb-4 font-brand;
+        }
+        .section-subtitle {
+            @apply text-center text-gray-500 mb-12;
+        }
+        .brand-color-text { color: #6d5d4b; }
+        .brand-color-bg { background-color: #6d5d4b; }
+        .brand-color-border { border-color: #6d5d4b; }
+        .accent-color-bg { background-color: #a38b75; }
+        .subtle-bg { background-color: #fcfaf8; }
+
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link {
+            @apply relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:transform after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-[#6d5d4b] after:transition-all after:duration-300;
+        }
+        .nav-link:hover:after {
+            @apply w-full;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-700" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home" class="flex-shrink-0">
+                    <h1 class="text-2xl font-brand font-bold brand-color-text">영양한입연구소</h1>
+                </a>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-6">
+                        <a href="#brand" class="nav-link text-gray-600 hover:brand-color-text px-3 py-2 rounded-md text-sm font-medium">브랜드</a>
+                        <a href="#product" class="nav-link text-gray-600 hover:brand-color-text px-3 py-2 rounded-md text-sm font-medium">제품소개</a>
+                        <a href="#reviews" class="nav-link text-gray-600 hover:brand-color-text px-3 py-2 rounded-md text-sm font-medium">고객후기</a>
+                        <a href="https://smartstore.naver.com/" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-green-600 transition-colors flex items-center">
+                            <i class="fas fa-shopping-cart mr-2"></i>스마트스토어
+                        </a>
+                    </div>
+                </div>
+                <!-- Social & Mobile Menu Button -->
+                <div class="flex items-center">
+                    <div class="hidden md:flex items-center space-x-4 ml-4">
+                        <a href="https://www.instagram.com/" target="_blank" class="text-gray-400 hover:text-pink-500 transition-colors"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank" class="text-gray-400 hover:text-red-500 transition-colors"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                    <div class="-mr-2 flex md:hidden">
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="bg-gray-100 inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:brand-color-text focus:outline-none">
+                            <i class="fas fa-bars" :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen}"></i>
+                            <i class="fas fa-times" :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen}"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#brand" @click="mobileMenuOpen = false" class="text-gray-600 hover:brand-color-text block px-3 py-2 rounded-md text-base font-medium">브랜드</a>
+                <a href="#product" @click="mobileMenuOpen = false" class="text-gray-600 hover:brand-color-text block px-3 py-2 rounded-md text-base font-medium">제품소개</a>
+                <a href="#reviews" @click="mobileMenuOpen = false" class="text-gray-600 hover:brand-color-text block px-3 py-2 rounded-md text-base font-medium">고객후기</a>
+                <a href="https://smartstore.naver.com/" target="_blank" class="text-green-500 hover:text-green-600 block px-3 py-2 rounded-md text-base font-medium">스마트스토어</a>
+                <div class="flex justify-center space-x-6 pt-4">
+                    <a href="https://www.instagram.com/" target="_blank" class="text-gray-400 hover:text-pink-500"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" class="text-gray-400 hover:text-red-500"><i class="fab fa-youtube fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative h-[80vh] min-h-[500px] flex items-center justify-center text-center text-white px-4">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="건강한 음식이 차려진 테이블">
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-6xl font-black font-brand leading-tight drop-shadow-lg">한입의 기쁨, 하루의 건강</h2>
+                <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md">자연의 재료와 정직한 연구로 만든 영양 가득 한입. <br>당신의 바쁜 일상에 건강한 순간을 선물합니다.</p>
+                <a href="#product" class="mt-8 inline-block bg-white text-gray-800 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">제품 보러가기</a>
+            </div>
+        </section>
+
+        <!-- Product Keypoints -->
+        <section class="py-20 bg-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-10 text-center">
+                    <div class="reveal">
+                        <div class="text-5xl accent-color-bg text-white w-20 h-20 rounded-full inline-flex items-center justify-center mb-4"><i class="fas fa-seedling"></i></div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">건강하게</h3>
+                        <p>원적외선 저온가공<br>무첨가, 무향료</p>
+                    </div>
+                    <div class="reveal">
+                        <div class="text-5xl accent-color-bg text-white w-20 h-20 rounded-full inline-flex items-center justify-center mb-4"><i class="fas fa-utensils"></i></div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">맛있게</h3>
+                        <p>곡물 고유의 풍미<br>자연스러운 단맛</p>
+                    </div>
+                    <div class="reveal">
+                        <div class="text-5xl accent-color-bg text-white w-20 h-20 rounded-full inline-flex items-center justify-center mb-4"><i class="fas fa-shopping-bag"></i></div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">간편하게</h3>
+                        <p>개별 포장 스틱형<br>가방에 쏙 – 출출할 때 한입</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Story -->
+        <section id="brand" class="py-24 subtle-bg">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974&auto=format&fit=crop" class="rounded-lg shadow-xl" alt="자연 원료">
+                </div>
+                <div class="reveal">
+                    <h2 class="text-4xl font-brand font-bold brand-color-text">Simple is Best.</h2>
+                    <p class="mt-4 text-lg">우리는 자연 그대로의 재료를<br>가장 단순하고 정직하게 가공하여<br>건강한 삶을 응원합니다.</p>
+                    <p class="mt-4">당신이 더 나은 하루를 보낼 수 있도록, 단 한입에 영양과 맛, 그리고 저희의 정성을 가득 담았습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details -->
+        <section id="product" class="py-24 bg-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">무엇이 다른가요?</h2>
+                <p class="section-subtitle">영양한입연구소는 본질에 집중합니다.</p>
+                
+                <div class="mt-16 grid md:grid-cols-2 gap-16 items-center">
+                    <div class="reveal space-y-8">
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-mug-hot text-3xl brand-color-text mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">맛부터 다릅니다</h3>
+                                <p>고온가공이 아닌 저온로스팅과 발효공법으로 자연재료 고유의 향과 식감을 살렸습니다.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <i class="fas fa-shield-alt text-3xl brand-color-text mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">건강도 확실합니다</h3>
+                                <p>참마, 우엉 등 전통 뿌리채소 기반의 고식이섬유 + 항산화 조합으로 속을 편안하게 채웁니다.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <i class="far fa-clock text-3xl brand-color-text mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">출출할 때 부담 없이</h3>
+                                <p>식사 사이, 퇴근길에도 ‘한입’으로 죄책감 없는 만족감을 드립니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <img src="https://images.unsplash.com/photo-1606856402889-87b6a2c1d85c?q=80&w=1974&auto=format&fit=crop" class="rounded-lg shadow-xl" alt="제품 패키지">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews -->
+        <section id="reviews" class="py-24 subtle-bg">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">고객들이 먼저 인정한 맛과 건강</h2>
+                <p class="section-subtitle">실제 고객님들의 생생한 후기입니다.</p>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="reveal bg-white p-8 rounded-lg shadow-lg">
+                        <i class="fas fa-quote-left text-2xl brand-color-text mb-4"></i>
+                        <p class="italic">"과하지 않고 구수해요. 먹고 나면 속도 편하고 든든해서 아침 대용으로 최고입니다."</p>
+                        <p class="text-right mt-4 font-semibold brand-color-text">- 김*정 님</p>
+                    </div>
+                    <div class="reveal bg-white p-8 rounded-lg shadow-lg" style="transition-delay: 200ms">
+                        <i class="fas fa-quote-left text-2xl brand-color-text mb-4"></i>
+                        <p class="italic">"애기 간식으로도 좋아요. 시판 과자처럼 달지 않고 성분도 착해서 믿고 먹여요."</p>
+                        <p class="text-right mt-4 font-semibold brand-color-text">- 박*연 님</p>
+                    </div>
+                    <div class="reveal bg-white p-8 rounded-lg shadow-lg" style="transition-delay: 400ms">
+                        <i class="fas fa-quote-left text-2xl brand-color-text mb-4"></i>
+                        <p class="italic">"포장이 깔끔하고 고급스러워서 부모님 선물용으로 드렸는데 정말 좋아하셨어요."</p>
+                        <p class="text-right mt-4 font-semibold brand-color-text">- 이*수 님</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 pt-16 pb-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-brand font-bold text-white mb-4">영양한입연구소</h3>
+                    <p class="text-sm text-gray-400">&copy; 2025 영양한입연구소. <br>All Rights Reserved.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">바로가기</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#brand" class="hover:text-white text-sm">브랜드</a></li>
+                        <li class="mb-2"><a href="#product" class="hover:text-white text-sm">제품소개</a></li>
+                        <li class="mb-2"><a href="#reviews" class="hover:text-white text-sm">고객후기</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">문의하기</h4>
+                    <ul>
+                        <li class="mb-2"><a href="mailto:contact@yy-hanip.com" class="hover:text-white text-sm">contact@yy-hanip.com</a></li>
+                        <li class="mb-2 text-sm">고객센터: 070-1234-5678</li>
+                        <li class="mb-2 text-sm">평일 10:00 - 17:00</li>
+                    </ul>
+                </div>
+                <div>
+                     <h4 class="font-semibold text-white mb-4">회사 정보</h4>
+                     <p class="text-sm">경북 안동시 일직면 감시골길 53-17</p>
+                     <p class="text-sm">사업자등록번호: 123-45-67890</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
+                <div class="flex space-x-4 mb-4 sm:mb-0">
+                    <a href="https://www.instagram.com/" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-youtube fa-lg"></i></a>
+                    <a href="https://smartstore.naver.com/" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M15.574,8.324,10.161,2.91l-4.57,4.57v4.6L10.161,16,12.868,13.3,8.3,8.73l2.707-2.707,4.569,4.568Z"></path><path d="M10.161,1.1l-1.8,1.8,4.57,4.57,1.8-1.8Z"></path><path d="M5.59,4.717,1.021,9.286,3.728,12l4.569-4.568Z"></path></svg>
+                    </a>
+                </div>
+                <p class="text-xs text-gray-500">개인정보처리방침 | 이용약관</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Naver TokTok Floating Button -->
+    <a href="https://talk.naver.com/" target="_blank" class="fixed bottom-6 right-6 bg-[#03C75A] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 32 32" fill="currentColor"><path d="M16,2a14,14,0,1,0,14,14A14,14,0,0,0,16,2ZM8.66,22.31l-1.39-2.52a10.43,10.43,0,0,1-1-4.88,10.16,10.16,0,0,1,10.1-10.21,10.06,10.06,0,0,1,10,10.21,10.17,10.17,0,0,1-10,10.21,11.2,11.2,0,0,1-2.19-.24l-3.55.93Z"></path></svg>
+    </a>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
