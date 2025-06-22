@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토닥한입_가래떡 | 인터랙티브 제품 소개서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Grain -->
+    <!-- Application Structure Plan: A single-page, vertical scrolling narrative structure with a sticky navigation bar for quick access. This user-friendly, story-telling approach is more suitable for a product introduction than a complex dashboard. The flow is designed to first present the problem/solution, then dive into the product's core concept, detailed composition (via interactive chart), key features, usage scenarios, and future vision. This logical progression guides the user through the 'why,' 'what,' 'how,' and 'what's next' of the product, making the information easily digestible and engaging. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Main Ingredient Categories -> Goal: Inform/Compare -> Viz: Doughnut Chart -> Interaction: Hover tooltips display specific ingredients -> Justification: Visually represents the product's composition balance more effectively than a list, enhancing user engagement. -> Library/Method: Chart.js (Canvas).
+        - Report Info: Key Features Table -> Goal: Organize/Inform -> Viz: Icon-based card grid -> Interaction: Subtle hover effects -> Justification: A responsive grid is more scannable and visually appealing than a standard table, especially on mobile devices. -> Library/Method: HTML/Tailwind.
+        - Report Info: Serving Suggestions List -> Goal: Inform/Guide -> Viz: Icon-based cards -> Interaction: None -> Justification: Icons and concise text provide quick, intuitive guidance for potential use cases. -> Library/Method: HTML/Tailwind.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-[#FDFBF8] text-[#4F463F]">
+
+    <header class="bg-[#FDFBF8]/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#hero" class="text-xl font-bold text-[#8C6D53]">토닥한입</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#concept" class="hover:text-[#A9896F] transition-colors">제품소개</a>
+                    <a href="#ingredients" class="hover:text-[#A9896F] transition-colors">제품구성</a>
+                    <a href="#features" class="hover:text-[#A9896F] transition-colors">핵심특징</a>
+                    <a href="#usage" class="hover:text-[#A9896F] transition-colors">섭취제안</a>
+                    <a href="#future" class="hover:text-[#A9896F] transition-colors">미래제품</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 flex flex-col space-y-2">
+                <a href="#concept" class="block py-2 text-center hover:bg-[#F5F1E D] rounded">제품소개</a>
+                <a href="#ingredients" class="block py-2 text-center hover:bg-[#F5F1ED] rounded">제품구성</a>
+                <a href="#features" class="block py-2 text-center hover:bg-[#F5F1ED] rounded">핵심특징</a>
+                <a href="#usage" class="block py-2 text-center hover:bg-[#F5F1ED] rounded">섭취제안</a>
+                <a href="#future" class="block py-2 text-center hover:bg-[#F5F1ED] rounded">미래제품</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-[60vh] flex items-center bg-[#F8F4F0]">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#8C6D53] leading-tight">토닥한입_가래떡</h1>
+                <p class="mt-4 text-xl md:text-2xl text-[#A9896F]">매일 먹어도 편안한 한입</p>
+                <p class="mt-6 max-w-2xl mx-auto text-base text-gray-600">
+                    바쁜 현대인을 위해, 건강과 편의성을 모두 담았습니다. <br class="hidden sm:block"> 통곡물과 식물성 단백질로 만들어 속이 편안하면서도 든든한, 새로운 식사 대용 떡을 만나보세요.
+                </p>
+            </div>
+        </section>
+
+        <section id="concept" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-[#8C6D53]">무엇을 지향하나요?</h2>
+                    <p class="mt-2 text-gray-600">‘토닥한입’은 건강한 식생활을 위한 4가지 핵심 가치를 추구합니다.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+                        <div class="text-4xl mb-3">🌾</div>
+                        <h3 class="font-semibold text-lg text-[#8C6D53]">통곡물 기반</h3>
+                        <p class="mt-2 text-sm text-gray-500">정제 탄수화물 대신 백진주쌀, 찰현미, 찰보리 등 통곡물을 사용하여 건강함을 더했습니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+                        <div class="text-4xl mb-3">😋</div>
+                        <h3 class="font-semibold text-lg text-[#8C6D53]">만족스러운 식감</h3>
+                        <p class="mt-2 text-sm text-gray-500">분쇄하지 않은 곡물 입자가 살아있어 씹는 즐거움과 함께 든든한 포만감을 제공합니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+                        <div class="text-4xl mb-3">🧘‍♀️</div>
+                        <h3 class="font-semibold text-lg text-[#8C6D53]">편안한 소화</h3>
+                        <p class="mt-2 text-sm text-gray-500">참마와 곡류 위주의 소화 친화적 재료로 구성되어 위에 부담을 주지 않습니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+                        <div class="text-4xl mb-3">🖐️</div>
+                        <h3 class="font-semibold text-lg text-[#8C6D53]">간편한 섭취</h3>
+                        <p class="mt-2 text-sm text-gray-500">한 손에 잡히는 크기와 개별 포장으로 언제 어디서든 간편하게 즐길 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="ingredients" class="py-20 bg-[#F8F4F0]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-[#8C6D53]">무엇으로 만들어졌나요?</h2>
+                    <p class="mt-2 text-gray-600">‘토닥한입’은 자연에서 온 건강한 재료들의 조화로 완성됩니다. 아래 차트에 마우스를 올려 각 재료 구성을 확인해보세요.</p>
+                </div>
+                <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                    <div class="w-full lg:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="ingredientsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#8C6D53] mb-2">① 형태와 포장</h3>
+                            <p class="text-gray-600">전통 가래떡의 든든한 두께감은 유지하되, 약 5cm 길이로 잘라 한입에 쏙 들어오는 크기입니다. 1회 제공량(2~3조각) 단위로 소포장되어 휴대와 보관이 용이합니다.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#8C6D53] mb-2">② 보관 및 섭취법</h3>
+                            <div class="flex items-center space-x-4 text-gray-600">
+                                <span class="text-2xl">❄️</span><span><span class="font-semibold">냉동보관</span> (30일 이상)</span>
+                            </div>
+                             <div class="flex items-center space-x-4 text-gray-600 mt-2">
+                                <span class="text-2xl">♨️</span><span><span class="font-semibold">자연해동 또는 전자레인지</span> (30초)</span>
+                            </div>
+                             <div class="flex items-center space-x-4 text-gray-600 mt-2">
+                                <span class="text-2xl">🍳</span><span><span class="font-semibold">프라이팬 구이</span> (겉바속쫀)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-[#8C6D53]">핵심 특징 한눈에 보기</h2>
+                    <p class="mt-2 text-gray-600">‘토닥한입’이 특별한 이유, 다섯 가지 핵심 특징을 소개합니다.</p>
+                </div>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg p-6 flex items-start space-x-4 shadow-sm hover:shadow-lg transition-shadow">
+                        <span class="text-3xl">🌿</span>
+                        <div>
+                            <h4 class="font-bold text-lg text-[#8C6D53]">건강성</h4>
+                            <p class="text-gray-600 mt-1">통곡물과 식물성 재료 중심의 건강한 배합</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 flex items-start space-x-4 shadow-sm hover:shadow-lg transition-shadow">
+                        <span class="text-3xl">🍽️</span>
+                        <div>
+                            <h4 class="font-bold text-lg text-[#8C6D53]">식감 & 포만감</h4>
+                            <p class="text-gray-600 mt-1">살아있는 통곡물 입자로 씹는 만족감과 포만감 제공</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg p-6 flex items-start space-x-4 shadow-sm hover:shadow-lg transition-shadow">
+                        <span class="text-3xl">🍃</span>
+                        <div>
+                            <h4 class="font-bold text-lg text-[#8C6D53]">소화 용이성</h4>
+                            <p class="text-gray-600 mt-1">곡류 위주 구성으로 위에 자극이 적고 편안함</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 flex items-start space-x-4 shadow-sm hover:shadow-lg transition-shadow">
+                        <span class="text-3xl">🎒</span>
+                        <div>
+                            <h4 class="font-bold text-lg text-[#8C6D53]">휴대성</h4>
+                            <p class="text-gray-600 mt-1">짧고 굵은 형태와 개별 소포장으로 이동 및 보관 편리</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 flex items-start space-x-4 shadow-sm hover:shadow-lg transition-shadow md:col-span-2">
+                        <span class="text-3xl">🔁</span>
+                         <div>
+                            <h4 class="font-bold text-lg text-[#8C6D53]">반복 섭취 적합성</h4>
+                            <p class="text-gray-600 mt-1">자극적이지 않고 담백한 기본 맛으로 구성되어 매일 먹어도 질리지 않음</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="usage" class="py-20 bg-[#F8F4F0]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-[#8C6D53]">언제 먹으면 좋을까요?</h2>
+                    <p class="mt-2 text-gray-600">일상의 다양한 순간, ‘토닥한입’으로 건강하고 든든하게 채워보세요.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 text-center">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-3xl">☀️</div>
+                        <p class="mt-2 font-medium text-sm">아침 식사 대용</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-3xl">🌙</div>
+                        <p class="mt-2 font-medium text-sm">늦은 저녁/야식</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-3xl">🏃‍♀️</div>
+                        <p class="mt-2 font-medium text-sm">운동 전후 보충</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div class="text-3xl">💼</div>
+                        <p class="mt-2 font-medium text-sm">바쁜 일정 속 틈새 식사</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-sm col-span-2 md:col-span-1 lg:col-span-1">
+                        <div class="text-3xl">🍽️</div>
+                        <p class="mt-2 font-medium text-sm">소분 식사 구성</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="future" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-[#8C6D53]">다음엔 무엇을 만나볼까요?</h2>
+                    <p class="mt-2 text-gray-600">‘토닥한입’의 가치를 이어갈 차기 제품 아이디어를 살짝 공개합니다.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="border border-dashed border-[#C8B8A8] p-6 rounded-lg text-center">
+                        <h3 class="font-semibold text-lg text-[#8C6D53]">곡물쌈떡</h3>
+                        <p class="mt-2 text-sm text-gray-500">얇은 떡피에 통곡물·콩류를 말아낸 도시락형 제품</p>
+                    </div>
+                    <div class="border border-dashed border-[#C8B8A8] p-6 rounded-lg text-center">
+                        <h3 class="font-semibold text-lg text-[#8C6D53]">우엉크럼블찰떡</h3>
+                        <p class="mt-2 text-sm text-gray-500">볶은 우엉과 견과 크럼블을 채운 간식형 제품</p>
+                    </div>
+                    <div class="border border-dashed border-[#C8B8A8] p-6 rounded-lg text-center">
+                        <h3 class="font-semibold text-lg text-[#8C6D53]">슬라이스바</h3>
+                        <p class="mt-2 text-sm text-gray-500">구이 조리에 특화된 납작한 바 형태의 응용 제품</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#F8F4F0] py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 토닥한입. All Rights Reserved.</p>
+            <p class="mt-1">본 페이지는 '토닥한입_가래떡' 제품 기획안을 바탕으로 제작된 인터랙티브 웹 애플리케이션입니다.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const ingredientsData = {
+            labels: ['탄수화물 기반', '통곡물 혼합', '단백질/섬유질', '풍미/기능'],
+            datasets: [{
+                label: '주원료 구성',
+                data: [45, 30, 20, 5],
+                backgroundColor: [
+                    '#D2B48C',
+                    '#A9896F',
+                    '#8C6D53',
+                    '#EAE0D5'
+                ],
+                borderColor: '#FDFBF8',
+                borderWidth: 4,
+                hoverOffset: 10,
+            }]
+        };
+
+        const tooltips = [
+            '백진주쌀, 찰현미, 찰보리',
+            '통 찰현미, 보리, 병아리콩, 검정콩',
+            '렌틸콩, 볶은 우엉, 흑임자, 참깨',
+            '생강분말, 백진주 쌀누룩'
+        ];
+
+        const config = {
+            type: 'doughnut',
+            data: ingredientsData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: "'Noto Sans KR', sans-serif"
+                            },
+                             color: '#4F463F'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + '%';
+                                }
+                                return label;
+                            },
+                             afterLabel: function(context) {
+                                return tooltips[context.dataIndex];
+                            }
+                        },
+                        backgroundColor: '#4F463F',
+                        titleFont: { size: 16 },
+                        bodyFont: { size: 14 },
+                        padding: 10,
+                        cornerRadius: 4,
+                        displayColors: false
+                    }
+                }
+            },
+        };
+
+        const ingredientsChart = new Chart(
+            document.getElementById('ingredientsChart'),
+            config
+        );
+    </script>
+
+</body>
+</html>
